@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Conference App</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="user-info">
+                <div class="avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span class="username">Loading...</span>
+            </div>
+            <div class="participants-list">
+                <h3>Participants</h3>
+                <ul id="participants"></ul>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="video-grid" id="video-grid"></div>
+            <div class="controls">
+                <button id="muteBtn" class="control-btn">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button id="videoBtn" class="control-btn">
+                    <i class="fas fa-video"></i>
+                </button>
+                <button id="screenShareBtn" class="control-btn">
+                    <i class="fas fa-desktop"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="join-modal" id="joinModal">
+        <div class="modal-content">
+            <h2>Join Video Conference</h2>
+            <input type="text" id="username" placeholder="Enter your name">
+            <button id="joinBtn">Join Room</button>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html> 

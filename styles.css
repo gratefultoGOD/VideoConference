@@ -1,0 +1,230 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --discord-dark: #36393f;
+    --discord-darker: #2f3136;
+    --discord-darkest: #202225;
+    --discord-light: #dcddde;
+    --discord-accent: #7289da;
+}
+
+body {
+    background-color: var(--discord-dark);
+    color: var(--discord-light);
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 240px;
+    background-color: var(--discord-darker);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    background-color: var(--discord-darkest);
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    background-color: var(--discord-accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5rem;
+}
+
+.participants-list {
+    flex: 1;
+}
+
+.participants-list h3 {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #8e9297;
+}
+
+.participants-list ul {
+    list-style: none;
+}
+
+.participants-list li {
+    padding: 0.5rem;
+    margin: 0.2rem 0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.participants-list li:hover {
+    background-color: var(--discord-darkest);
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.video-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.video-container {
+    position: relative;
+    aspect-ratio: 16/9;
+    background-color: var(--discord-darkest);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.controls {
+    padding: 1rem;
+    background-color: var(--discord-darker);
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.control-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--discord-darkest);
+    color: var(--discord-light);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.control-btn:hover {
+    background-color: var(--discord-accent);
+}
+
+.control-btn.active {
+    background-color: #ed4245;
+}
+
+.join-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: var(--discord-darker);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.modal-content h2 {
+    margin-bottom: 1rem;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    background-color: var(--discord-darkest);
+    border: none;
+    border-radius: 4px;
+    color: var(--discord-light);
+}
+
+.modal-content button {
+    padding: 0.5rem 2rem;
+    background-color: var(--discord-accent);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #5b6eae;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        align-items: center;
+        padding: 0.5rem;
+    }
+
+    .user-info {
+        margin-bottom: 0;
+        margin-right: 1rem;
+    }
+
+    .participants-list {
+        display: flex;
+        align-items: center;
+    }
+
+    .participants-list h3 {
+        margin: 0 1rem 0 0;
+    }
+
+    .participants-list ul {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 0.5rem;
+    }
+
+    .participants-list li {
+        margin: 0 0.5rem;
+    }
+
+    .video-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .controls {
+        padding: 0.5rem;
+    }
+} 
