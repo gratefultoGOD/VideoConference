@@ -27,10 +27,52 @@ joinBtn.addEventListener('click', () => {
 
 async function initializePeer() {
     try {
-        myStream = await navigator.mediaDevices.getUserMedia({
-            video: true,
-            audio: true
-        });
+        // First check if the browser supports getUserMedia
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            throw new Error('Tarayıcınız kamera ve mikrofon erişimini desteklemiyor. Lütfen Chrome veya Firefox\'un güncel bir sürümünü kullanın.');
+        }
+
+        // Request permissions with clear constraints for Firefox
+        const constraints = {
+            audio: {
+                echoCancellation: true,
+                noiseSuppression: true,
+                autoGainControl: true
+            },
+            video: {
+                width: { min: 640, ideal: 1280, max: 1920 },
+                height: { min: 480, ideal: 720, max: 1080 },
+                frameRate: { ideal: 30, max: 60 }
+            }
+        };
+
+        try {
+            // First request audio permission separately (helps with Firefox)
+            await navigator.mediaDevices.getUserMedia({ audio: constraints.audio });
+            console.log('Mikrofon izni alındı');
+
+            // Then request video permission
+            await navigator.mediaDevices.getUserMedia({ video: constraints.video });
+            console.log('Kamera izni alındı');
+
+            // Finally get both streams together
+            myStream = await navigator.mediaDevices.getUserMedia(constraints);
+            console.log('Tüm medya akışları başarıyla alındı');
+
+        } catch (err) {
+            console.error('Media error:', err);
+            if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+                throw new Error('Kamera ve mikrofon erişimi reddedildi. Lütfen tarayıcı ayarlarınızdan izin verin ve sayfayı yenileyin.');
+            } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
+                throw new Error('Kamera veya mikrofon bulunamadı. Lütfen cihaz bağlantılarınızı kontrol edin.');
+            } else if (err.name === 'NotReadableError' || err.name === 'TrackStartError') {
+                throw new Error('Kamera veya mikrofonunuz başka bir uygulama tarafından kullanılıyor.');
+            } else if (err.name === 'OverconstrainedError') {
+                throw new Error('Kamera özellikleriniz desteklenmiyor. Lütfen farklı bir kamera kullanın.');
+            } else {
+                throw new Error(`Medya cihazlarına erişilemedi: ${err.message}`);
+            }
+        }
         
         // Add self video without audio
         const selfVideo = document.createElement('video');
@@ -191,8 +233,9 @@ async function initializePeer() {
         });
 
     } catch (err) {
-        console.error('Failed to get media devices:', err);
-        alert('Failed to access camera and microphone. Please check permissions.');
+        console.error('Media access error:', err);
+        alert(err.message || 'Kamera ve mikrofona erişilemedi. Lütfen izinleri kontrol edin ve tekrar deneyin.');
+        return;
     }
 }
 

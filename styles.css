@@ -227,4 +227,36 @@ body {
     .controls {
         padding: 0.5rem;
     }
+}
+
+.permission-info {
+    background-color: rgba(114, 137, 218, 0.1);
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--discord-light);
+}
+
+.permission-info i {
+    color: var(--discord-accent);
+    margin-right: 0.5rem;
+}
+
+.permission-status {
+    margin-bottom: 1.5rem;
+}
+
+.permission-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background-color: var(--discord-darkest);
+    border-radius: 4px;
+}
+
+.permission-item i {
+    margin-right: 0.5rem;
+    color: var(--discord-accent);
 } 

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Conference App</title>
+    <title>Video Konferans Uygulaması</title>
+    <meta name="description" content="Güvenli video konferans uygulaması - Kamera ve mikrofon erişimi gereklidir">
     <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -39,9 +40,23 @@
     </div>
     <div class="join-modal" id="joinModal">
         <div class="modal-content">
-            <h2>Join Video Conference</h2>
-            <input type="text" id="username" placeholder="Enter your name">
-            <button id="joinBtn">Join Room</button>
+            <h2>Video Konferansa Katıl</h2>
+            <p class="permission-info">
+                <i class="fas fa-info-circle"></i>
+                Bu uygulama kamera ve mikrofon erişimi gerektirir. Lütfen tarayıcınızın izin isteklerini kabul edin.
+            </p>
+            <div class="permission-status">
+                <div class="permission-item">
+                    <i class="fas fa-microphone"></i>
+                    <span id="micStatus">Mikrofon izni bekleniyor...</span>
+                </div>
+                <div class="permission-item">
+                    <i class="fas fa-video"></i>
+                    <span id="cameraStatus">Kamera izni bekleniyor...</span>
+                </div>
+            </div>
+            <input type="text" id="username" placeholder="İsminizi girin">
+            <button id="joinBtn">Katıl</button>
         </div>
     </div>
     <script src="app.js"></script>
